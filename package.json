@@ -1,0 +1,30 @@
+{
+  "name": "console.mute",
+  "version": "0.1.0",
+  "description": "Temporarily mute the log. Resume and retrieve logged data later. For node.js",
+  "main": "console.js",
+  "scripts": {
+    "test": "tape tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karlpokus/console.mute.git"
+  },
+  "keywords": [
+    "console",
+    "mute",
+    "resume",
+    "log",
+    "time",
+    "timeEnd"
+  ],
+  "author": "Karl Pokus <karl.pokus@gmail.com> (https://github.com/karlpokus)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/karlpokus/console.mute/issues"
+  },
+  "homepage": "https://github.com/karlpokus/console.mute#readme",
+  "devDependencies": {
+    "tape": "^4.6.0"
+  }
+}
