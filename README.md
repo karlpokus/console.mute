@@ -16,10 +16,18 @@ require('console.mute'); // adds mute and resume to console
 console.log('a'); // will log
 console.mute(); // mutes log
 console.log('b'); // will not log
-console.log('c'); // will not log
 var data = console.resume(); // resumes log and returns logged data during mute
-console.log('d'); // will log
-console.log(data); // logs ['b', 'c']
+console.log('c'); // will log
+console.log(data); // logs ['b']
+
+// alter history
+console.mute();
+console.log('a');
+var part = console.resume('preserve'); // preserves history
+console.mute();
+console.log('b');
+var history = console.resume(); // reset history
+console.log(history); // logs ['a', 'b']
 ```
 
 # Test

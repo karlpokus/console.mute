@@ -8,10 +8,15 @@ module.exports = (function foo() {
     };
   }
 
-  console.resume = function() {
+  console.resume = function(preserve) {
     process.stdout.write = saved;
-    var out = data;
-    data = [];
-    return out;
+    
+    if (preserve) {
+      return data;
+    } else {
+      var out = data;
+      data = [];
+      return out;
+    }    
   }
 })();
