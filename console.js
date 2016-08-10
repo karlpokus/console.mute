@@ -1,22 +1,36 @@
 module.exports = (function foo() {
-  var saved = process.stdout.write,
-      data = [];
+  var stdoutSaved = process.stdout.write,
+      stderrSaved = process.stderr.write,
+      stdoutData = [],
+      stderrData = [];
 
   console.mute = function() {
     process.stdout.write = function(str, encoding, fd) {
-      data.push(str.replace(/\r?\n|\r/g, ''));
+      stdoutData.push(str.replace(/\r?\n|\r/g, ''));
     };
-  }
+    process.stderr.write = function (str, encoding, fd) {
+      stderrData.push(str.replace(/\r?\n|\r/g, ''));
+    }
+  };
 
   console.resume = function(preserve) {
-    process.stdout.write = saved;
+    process.stdout.write = stdoutSaved;
+    process.stderr.write = stderrSaved;
     
     if (preserve) {
-      return data;
+      return {
+        stdout: stdoutData,
+        stderr: stderrData
+      };
     } else {
-      var out = data;
-      data = [];
-      return out;
+      var outstd = stdoutData;
+      var outerr = stderrData;
+      stdoutData = [];
+      stderrData = [];
+      return {
+        stdout: outstd,
+        stderr: outerr
+      };
     }    
   }
 })();

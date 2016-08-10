@@ -1,6 +1,6 @@
 {
   "name": "console.mute",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Temporarily mute the log. Resume and retrieve logged data later. For node.js",
   "main": "console.js",
   "scripts": {
