@@ -8,13 +8,13 @@ test('iife', function(t){
 });
 
 test('mute and resume', function(t){
-  
+
   console.mute();
   console.log('log');
   console.log('muted');
   var muted = console.resume('preserve');
   t.equal(muted.stdout.join(), 'log,muted', 'muted stdout data returned on resume');
-  
+
   console.mute();
   console.log('moar');
   console.log('data');
@@ -26,18 +26,18 @@ test('mute and resume', function(t){
   console.log('again');
   var reset = console.resume();
   t.equal(reset.stdout.join(), 'muted,again', 'data reset is default');
-  
+
   console.mute();
   console.error('oh');
   console.error('noes');
   var mutedErr = console.resume('preserve');
   t.equal(mutedErr.stderr.join(), 'oh,noes', 'muted stderr data returned on resume');
-  
+
   console.mute();
   console.error('dis');
   console.error('bad');
   var errHistory = console.resume();
   t.equal(errHistory.stderr.join(), 'oh,noes,dis,bad', 'history preserved');
-  
+
   t.end();
 });
