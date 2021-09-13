@@ -39,5 +39,17 @@ test('mute and resume', function(t){
   var errHistory = console.resume();
   t.equal(errHistory.stderr.join(), 'oh,noes,dis,bad', 'history preserved');
 
+  console.mute({ keepNewLines: false });
+  console.log('muted\r\nagain');
+  console.log('and\nagain\nand\nagain');
+  var reset = console.resume();
+  t.equal(reset.stdout.join(), 'mutedagain,andagainandagain', 'strip newlines if options.keepNewLines is false');
+
+  console.mute({ keepNewLines: true });
+  console.log('muted\r\nagain');
+  console.log('and\nagain\nand\nagain');
+  var reset = console.resume();
+  t.equal(reset.stdout.join(), 'muted\r\nagain,and\nagain\nand\nagain', 'do not strip newlines if options.keepNewLines is true');
+
   t.end();
 });

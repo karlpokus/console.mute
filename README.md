@@ -29,6 +29,13 @@ console.mute();
 console.log('b');
 var history = console.resume(); // reset history
 console.log(history.stdout); // logs ['a', 'b']
+
+// keep newlines unaltered (stripped away by default)
+console.mute({ keepNewLines: true }); // keep newlines 
+console.log('b\nc');
+var history = console.resume(); // reset history
+console.log(history.stdout); // logs ['b\nc']
+
 ```
 
 # Test

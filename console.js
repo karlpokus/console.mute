@@ -4,12 +4,20 @@ module.exports = (function foo() {
       stdoutData = [],
       stderrData = [];
 
-  console.mute = function() {
+  console.mute = function(options) {
     process.stdout.write = function(str, encoding, fd) {
-      stdoutData.push(str.replace(/\r?\n|\r/g, ''));
+      stdoutData.push(
+        options && options.keepNewLines
+          ? str.replace(/(\r?\n|\r)$/, '')    // Only strip trailing newline
+          : str.replace(/\r?\n|\r/g, '')
+      );
     };
     process.stderr.write = function (str, encoding, fd) {
-      stderrData.push(str.replace(/\r?\n|\r/g, ''));
+      stderrData.push(
+        options && options.keepNewLines
+          ? str.replace(/(\r?\n|\r)$/, '')    // Only strip trailing newline
+          : str.replace(/\r?\n|\r/g, '')
+      );
     }
   };
 
